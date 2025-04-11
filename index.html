@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stopwatch with Milliseconds</title>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+    #display {
+      font-size: 48px;
+      margin-bottom: 30px;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .start { background-color: #4CAF50; color: white; }
+    .stop { background-color: #f44336; color: white; }
+    .reset { background-color: #2196F3; color: white; }
+    .btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+
+  <h1>⏱️ Stopwatch </h1>
+  <div id="display">00:00:00:00</div>
+
+  <button class="btn start" onclick="startTimer()">Start</button>
+  <button class="btn stop" onclick="stopTimer()">Stop</button>
+  <button class="btn reset" onclick="resetTimer()">Reset</button>
+
+  <script>
+    let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+    let display = document.getElementById("display");
+    let timer = null;
+
+    function updateDisplay() {
+      let h = hours < 10 ? "0" + hours : hours;
+      let m = minutes < 10 ? "0" + minutes : minutes;
+      let s = seconds < 10 ? "0" + seconds : seconds;
+      let ms = milliseconds < 10 ? "00" + milliseconds :
+               milliseconds < 100 ? "0" + milliseconds : milliseconds;
+      display.innerText = `${h}:${m}:${s}:${ms}`;
+    }
+
+    function startTimer() {
+      if (timer !== null) return;
+      timer = setInterval(() => {
+        milliseconds += 10;
+        if (milliseconds === 1000) {
+          milliseconds = 0;
+          seconds++;
+        }
+        if (seconds === 60) {
+          seconds = 0;
+          minutes++;
+        }
+        if (minutes === 60) {
+          minutes = 0;
+          hours++;
+        }
+        updateDisplay();
+      }, 10); // 10ms = smooth + not too fast
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+      timer = null;
+      updateDisplay();
+    }
+  </script>
+
+</body>
+</html>
