@@ -5,18 +5,22 @@
   <title>Stopwatch with Milliseconds</title>
   <style>
     body {
-      background-color: #f4f4f4;
+      background-image: url(https://img.freepik.com/premium-vector/clusters-star-dark-sky-black-background-vector-illustration_643070-509.jpg);
       font-family: Arial, sans-serif;
       text-align: center;
       padding-top: 100px;
+      background-color: black;
     }
     h1 {
       font-size: 36px;
       margin-bottom: 40px;
+      text-shadow: 3px 3px  black;
     }
     #display {
       font-size: 48px;
       margin-bottom: 30px;
+      color: white;
+      text-shadow: 2px 2px black;
     }
     .btn {
       padding: 10px 20px;
@@ -34,7 +38,7 @@
 </head>
 <body>
 
-  <h1>⏱️ Stopwatch </h1>
+  <h1 style="color: white;">⏱️ Stopwatch </h1>
   <div id="display">00:00:00:00</div>
 
   <button class="btn start" onclick="startTimer()">Start</button>
